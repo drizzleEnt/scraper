@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "github.com/drizzleEnt/scraper/pkg/scraper_v1;scraper_v1";
+
+service Scraper{
+    rpc Scrap (ScrapUrl) returns (ScrapData);
+}
+
+message ScrapData{
+    string text = 1;
+}
+
+message ScrapUrl{
+    string url = 1;
+}

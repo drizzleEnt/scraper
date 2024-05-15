@@ -24,7 +24,7 @@ generate:
 generate-scraper-api:
 	mkdir -p pkg/swagger
 	mkdir -p pkg/scraper
-	protoc --proto_path api/scraper --proto_path vendor.protogen \
+	protoc --proto_path api/scraper_v1 \
 	--go_out=pkg/scraper --go_opt=paths=source_relative \
 	--plugin=protoc-gen-go=bin/protoc-gen-go \
 	--go-grpc_out=pkg/scraper --go-grpc_opt=paths=source_relative \
@@ -35,7 +35,7 @@ generate-scraper-api:
 	--plugin=protoc-gen-grpc-gateway=bin/protoc-gen-grpc-gateway \
 	--openapiv2_out=allow_merge=true,merge_file_name=api:pkg/swagger \
 	--plugin=protoc-gen-openapiv2=bin/protoc-gen-openapiv2 \
-	api/scraper/scraper.proto
+	api/scraper_v1/scraper.proto
 
 
 install-golangci-lint:

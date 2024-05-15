@@ -1,26 +1,22 @@
 package main
 
 import (
-	"fmt"
+	"context"
+	"log"
 
-	"github.com/drizzleent/scraper/internal/service"
-	"github.com/drizzleent/scraper/internal/service/scraper"
-	"github.com/gocolly/colly"
-)
-
-const (
-	userAgent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0"
+	"github.com/drizzleent/scraper/internal/app"
 )
 
 func main() {
-	var srv service.Scraper
+	ctx := context.Background()
 
-	c := colly.NewCollector(colly.UserAgent(userAgent))
-	srv = scraper.NewScraper(c)
-
-	err := srv.Scrap()
+	app, err := app.New(ctx)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatalf("Failed to init app %s", err.Error())
 	}
 
+	err = app.Run()
+	if err != nil {
+		log.Fatalf("Failed to run app %s", err.Error())
+	}
 }
